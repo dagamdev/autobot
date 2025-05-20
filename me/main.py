@@ -59,6 +59,8 @@ async def messageHandler(event: events.NewMessage.Event):
 async def start_me ():
   await client.start() # type: ignore
   print('✅ Sesion iniciada')
+  obs.connect()
+  
   try:
     await client.run_until_disconnected()  # type: ignore
   except KeyboardInterrupt:
