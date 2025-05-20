@@ -57,9 +57,6 @@ async def messageHandler(event: events.NewMessage.Event):
         print(f"❌ Error al iniciar grabación: {e}")
 
 async def start_me ():
-  print('Start me')
-  # asyncio.set_event_loop(asyncio.new_event_loop())
-
   await client.start() # type: ignore
   print('✅ Sesion iniciada')
   try:
@@ -69,17 +66,4 @@ async def start_me ():
   finally:
     await client.disconnect() # type: ignore
     print('✅ Bot desconectado')
-  
-  # async def main(): 
-  #   await client.start() # type: ignore
-  #   print('✅ Sesion iniciada')
-  #   try:
-  #     await client.run_until_disconnected()  # type: ignore
-  #   except KeyboardInterrupt:
-  #     print('⚠️ Bot detenido por usuario (Ctrl+C)')
-  #   finally:
-  #     await client.disconnect() # type: ignore
-  #     print('✅ Bot desconectado')
-
-  # asyncio.run(main())
 
