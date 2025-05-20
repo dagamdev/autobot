@@ -1,0 +1,4 @@
+__pycache__
+.venv
+.env
+mi_sesion.session
