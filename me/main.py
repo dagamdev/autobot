@@ -14,11 +14,12 @@ async def messageHandler(event: events.NewMessage.Event):
   sender = await event.get_sender()
   text = event.raw_text
 
-  if sender.username == variables.target_username and not variables.recording:
+  if sender.username == variables.target_username and not variables.open_meet:
     match = meet_pattern.search(text)
     if match:
       print("¡Enlace de Meet detectado!", match[0])
       webbrowser.open(match[0])
+      variables.open_meet = True
       await client(SendReactionRequest(
         peer=event.chat_id, # type: ignore
         msg_id=event.id,
@@ -27,19 +28,6 @@ async def messageHandler(event: events.NewMessage.Event):
 
   # Bot id
   if event.chat_id == 8169322411:
-    if text == 'El Meet ha terminado':
-      try:
-        response = obs.stop_recording()
-        print(response)
-        variables.recording = False
-        await client(SendReactionRequest(
-          peer=event.chat_id, # type: ignore
-          msg_id=event.id,
-          reaction=[ReactionEmoji(emoticon='👍')]
-        ))
-      except Exception as e:
-        print(f"❌ Error al detener grabación: {e}")
-
     if text == 'Te has unido al Meet':
       variables.recording = True
       try:
@@ -55,6 +43,20 @@ async def messageHandler(event: events.NewMessage.Event):
       except Exception as e:
         variables.recording = False
         print(f"❌ Error al iniciar grabación: {e}")
+
+    if text == 'El Meet ha terminado':
+      try:
+        response = obs.stop_recording()
+        print(response)
+        variables.open_meet = False
+        variables.recording = False
+        await client(SendReactionRequest(
+          peer=event.chat_id, # type: ignore
+          msg_id=event.id,
+          reaction=[ReactionEmoji(emoticon='👍')]
+        ))
+      except Exception as e:
+        print(f"❌ Error al detener grabación: {e}")
 
 async def start_me ():
   await client.start() # type: ignore
