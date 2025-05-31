@@ -1,6 +1,7 @@
 autoclick_enabled = False
 autoclick_thread = None
 battery_percent = 0
+holdclick_enabled = False
 CHAT_ID = 7843992668
 
 class CommandData:
@@ -14,5 +15,6 @@ command_list = (
   CommandData('batterystatus', '🔋 Shows the battery status of my PC'),
   CommandData('cursorposition', '📌 Gets the position of the cursor on the screen'),
   CommandData('autoclick', '👆 Enables or disables cursor auto-click'),
-  CommandData('chainersfarm', '🧑‍🌾 Manages Chainers farm automation')
+  CommandData('chainersfarm', '🧑‍🌾 Manages Chainers farm automation'),
+  CommandData('holdclick', '🧿 Manage button holding')
 )

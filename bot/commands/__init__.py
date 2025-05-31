@@ -4,5 +4,6 @@ from .battery_status import battery_status
 from .auto_click import auto_click
 from .cursor_position import cursor_position
 from .chainers_farm import chainers_farm
+from .hold_click import hold_click
 
-__all__ = ['start_command', 'open_page', 'battery_status', 'auto_click', 'cursor_position', 'chainers_farm']
+__all__ = ['start_command', 'open_page', 'battery_status', 'auto_click', 'cursor_position', 'chainers_farm', 'hold_click']

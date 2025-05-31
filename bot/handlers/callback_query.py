@@ -38,9 +38,9 @@ async def update_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
       )
 
     except Exception as e:
-      print(f"Error in handle callback auto_click command: {e}")
+      print(f"Error in handle callback auto_click callback: {e}")
 
-  if query.data in ['close_auto_click', 'close_chainers_farm']: 
+  if query.data in ['close_auto_click', 'close_chainers_farm', 'close_hold_click']: 
     await query.answer()
     await query.edit_message_reply_markup()
 
@@ -66,4 +66,29 @@ async def update_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
       )
 
     except Exception as e:
-      print(f"Error in handle callback chainers_farm command: {e}")
+      print(f"Error in handle callback chainers_farm callback: {e}")
+
+  if query.data == 'hold_click': 
+    try:
+      variables.holdclick_enabled = not variables.holdclick_enabled
+      if variables.holdclick_enabled:
+        pyautogui.mouseDown()
+      else:
+        pyautogui.mouseUp()
+        
+      await query.answer()
+      keyboard = [
+        [
+          InlineKeyboardButton('Disable hold click' if variables.holdclick_enabled  else 'Enable hold click', callback_data='hold_click'),
+          InlineKeyboardButton('Close', callback_data='close_hold_click'),
+        ]
+      ]
+
+      # Edita el mensaje original con nuevo texto
+      await query.edit_message_text('<b>🟢 Hold click enabled</b>' if variables.holdclick_enabled else'<b>🔴 Hold click disabled</b>',
+        parse_mode=constants.ParseMode.HTML,
+        reply_markup=InlineKeyboardMarkup(keyboard)
+      )
+
+    except Exception as e:
+      print(f"Error in handle callback hold_click callback: {e}")
