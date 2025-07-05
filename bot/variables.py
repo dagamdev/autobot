@@ -1,7 +1,8 @@
 autoclick_enabled = False
 autoclick_thread = None
 battery_percent = 0
-holdclick_enabled = False
+holdleftclick_enabled = False
+holdrightclick_enabled = False
 CHAT_ID = 7843992668
 
 class CommandData:
@@ -16,5 +17,6 @@ command_list = (
   CommandData('cursorposition', '📌 Gets the position of the cursor on the screen'),
   CommandData('autoclick', '👆 Enables or disables cursor auto-click'),
   CommandData('chainersfarm', '🧑‍🌾 Manages Chainers farm automation'),
-  CommandData('holdclick', '🧿 Manage button holding')
+  CommandData('holdleftclick', '🧿 Manage left button holding'),
+  CommandData('holdrightclick', '🧿 Manage right button holding')
 )

@@ -5,7 +5,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, Application, Callba
 from typing import Any, Dict
 import asyncio
 import threading
-from .commands import start_command, open_page, battery_status, auto_click, cursor_position, chainers_farm, hold_click
+from .commands import start_command, open_page, battery_status, auto_click, cursor_position, chainers_farm, hold_left_click, hold_right_click
 from .handlers import update_callback
 from bot import utils, variables
 from me.main import start_me
@@ -28,7 +28,8 @@ def start_bot():
   app.add_handler(CommandHandler('autoclick', auto_click))
   app.add_handler(CommandHandler('cursorposition', cursor_position))
   app.add_handler(CommandHandler('chainersfarm', chainers_farm))
-  app.add_handler(CommandHandler('holdclick', hold_click))
+  app.add_handler(CommandHandler('holdleftclick', hold_left_click))
+  app.add_handler(CommandHandler('holdrightclick', hold_right_click))
   app.add_handler(CallbackQueryHandler(update_callback))
   
   async def on_startup(aplication: AppType): 

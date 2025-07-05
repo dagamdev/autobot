@@ -25,5 +25,5 @@ def harvest_and_sow (firstPosition: Tuple[int, int], secondPosition: Tuple[int, 
 def auto_chainersfarm_loop (): 
   while auto_chainersfarm:
     harvest_and_sow((928, 705), (934, 631))
-    harvest_and_sow((1020, 782), (1020, 686))
+    # harvest_and_sow((1020, 782), (1020, 686))
     time.sleep(122)
