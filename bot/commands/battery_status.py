@@ -8,6 +8,9 @@ async def battery_status (update: Update, context):
   
   try:
     battery = psutil.sensors_battery()
+    if not battery:
+      return
+
     now_time = datetime.now()
     new_time = now_time
     times = []

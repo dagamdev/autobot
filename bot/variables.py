@@ -3,7 +3,6 @@ autoclick_thread = None
 battery_percent = 0
 holdleftclick_enabled = False
 holdrightclick_enabled = False
-CHAT_ID = 7843992668
 
 class CommandData:
   def __init__(self, name: str, description: str): 

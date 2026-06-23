@@ -1,35 +1,32 @@
-from os import getenv
-from dotenv import load_dotenv
 from telegram import Update, BotCommand
-from telegram.ext import ApplicationBuilder, CommandHandler, Application, CallbackQueryHandler, ExtBot, JobQueue, ContextTypes
+from telegram.ext import ApplicationBuilder, CommandHandler, Application, CallbackQueryHandler, ExtBot, JobQueue, ContextTypes, filters
 from typing import Any, Dict
 import asyncio
 import threading
 from .commands import start_command, open_page, battery_status, auto_click, cursor_position, chainers_farm, hold_left_click, hold_right_click
 from .handlers import update_callback
-from bot import utils, variables
+from bot import utils, variables, config
 from me.main import start_me
 
 AppType = Application[ExtBot[None], ContextTypes.DEFAULT_TYPE, Dict[Any, Any], Dict[Any, Any], Dict[Any, Any], JobQueue[ContextTypes.DEFAULT_TYPE]]
 
 
 # Bot token can be obtained via https://t.me/BotFather
-load_dotenv()
-TOKEN = getenv("BOT_TOKEN") or ''
 
+user_filter = filters.User(user_id=config.CHAT_ID)
 
 def start_bot():
   # asyncio.set_event_loop(asyncio.new_event_loop())
-  app = ApplicationBuilder().token(TOKEN).build()
+  app = ApplicationBuilder().token(config.TOKEN).build()
 
-  app.add_handler(CommandHandler('start', start_command))
-  app.add_handler(CommandHandler('openpage', open_page))
-  app.add_handler(CommandHandler('batterystatus', battery_status))
-  app.add_handler(CommandHandler('autoclick', auto_click))
-  app.add_handler(CommandHandler('cursorposition', cursor_position))
-  app.add_handler(CommandHandler('chainersfarm', chainers_farm))
-  app.add_handler(CommandHandler('holdleftclick', hold_left_click))
-  app.add_handler(CommandHandler('holdrightclick', hold_right_click))
+  app.add_handler(CommandHandler('start', start_command, filters=user_filter))
+  app.add_handler(CommandHandler('openpage', open_page, filters=user_filter))
+  app.add_handler(CommandHandler('batterystatus', battery_status, filters=user_filter))
+  app.add_handler(CommandHandler('autoclick', auto_click, filters=user_filter))
+  app.add_handler(CommandHandler('cursorposition', cursor_position, filters=user_filter))
+  app.add_handler(CommandHandler('chainersfarm', chainers_farm, filters=user_filter))
+  app.add_handler(CommandHandler('holdleftclick', hold_left_click, filters=user_filter))
+  app.add_handler(CommandHandler('holdrightclick', hold_right_click, filters=user_filter))
   app.add_handler(CallbackQueryHandler(update_callback))
   
   async def on_startup(aplication: AppType): 

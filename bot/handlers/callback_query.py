@@ -9,7 +9,7 @@ from bot.lib import auto_farm
 def autoclick_loop():
   while variables.autoclick_enabled:
     pyautogui.click()
-    time.sleep(0.02)
+    time.sleep(0.0072)
 
 async def update_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
   query = update.callback_query
